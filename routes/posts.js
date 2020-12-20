@@ -124,7 +124,7 @@ router.post("/acceptRequest/:requestID/:friendName", function (req, res, next) {
   });
 
   // deleting friend request because they are now friends
-  Request.find({}, function (err, postID) {
+  Request.find({}, function (err, Id) {
     if (err) throw err;
     MongoClient.connect(url, function (err, db) {
       if (err) throw err;
@@ -409,12 +409,12 @@ function updateRequestId() {
 // updating post id once new post is made,
 // function is called from relevant methods
 function updatePostId() {
-  postTracker.find({}, function (err, postID) {
+  postTracker.find({}, function (err, Id) {
     if (err) throw err;
     MongoClient.connect(url, function (err, db) {
       if (err) throw err;
       var dbo = db.db("database");
-      var newval = postID[0].id + 1;
+      var newval = Id[0].id + 1;
 
       dbo
         .collection("ids")
@@ -500,16 +500,16 @@ router.post("/create/:page", sanitizeBody("*").trim().escape(), function (
   // if post is under 1000 characters
   // post will be saved
   else {
-    postTracker.find({}, function (err, postID) {
+    postTracker.find({}, function (err, Id) {
       if (err) throw err;
       var postaus1 = Post({
-        postId: postID[0].id,
+        postId: Id[0].id,
         personLoggedIn: userName,
         personPost: local_post,
         date: time
       }).save(function (err) {
         if (err) throw err;
-        console.log("post added!");
+        console.log("Post added");
       });
       updatePostId();
     });
@@ -669,7 +669,7 @@ router.post("/delete/:postId", sanitizeBody("*").trim().escape(), function (
   res,
   next
 ) {
-  Post.find({}, function (err, postID) {
+  Post.find({}, function (err, Id) {
     if (err) throw err;
     MongoClient.connect(url, function (err, db) {
       if (err) throw err;
@@ -697,7 +697,7 @@ router.post(
   "/deleteFriend/:name/:friendname",
   sanitizeBody("*").trim().escape(),
   function (req, res, next) {
-    Friend.find({}, function (err, postID) {
+    Friend.find({}, function (err, Id) {
       if (err) throw err;
       MongoClient.connect(url, function (err, db) {
         if (err) throw err;
