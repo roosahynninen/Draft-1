@@ -1,0 +1,70 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='start/style.css')
+    style
+      include ../start/style_post.css
+ 
+    h1= "Naamakirja"
+    
+    <div class=container>
+      <h2 id=title1> Welcome to Naamakirja
+      <h2>
+      <h2 id= title2> #{title}
+      <h2>
+      <h5 id= leftTitle> Show my feed
+          form(method='GET' action='/posts/')
+            button.btn.btn-primary(type='submit') Go!
+      <h5>
+
+      <h5 id= leftTitle> Show my page 
+          form(method='GET' action='/posts/mypage')
+            button.btn.btn-primary(type='submit') Go!
+      <h5>
+
+      <h5 id= leftTitle> Log out
+          form(method='POST' action='/posts/logout')
+            button.btn.btn-primary(type='submit') Log Out
+      <h5>
+      <div>
+    <div>
+  - var page = person;
+  <div class = container2> 
+    h6 Filter posts by person
+      form(method='POST' action='/posts/filter/' + page)
+                div.form-group
+                  input#content.form-control(type='text', placeholder='Name' name='personName')
+                button.btn.btn-primary(type='submit') Search
+      <h5 id=msg> #{message} 
+        <h5>
+    - var friendCounter = 0
+    each friend in friend_list
+
+      - if (title === friend.name && person === friend.friendWith)
+          - if (friendCounter === 0)
+              h4= 'Feed by ' + person + ":"
+              <div id=line> <div>
+              - friendCounter++
+    
+          each x in post_list.reverse()
+                - if (x.personLoggedIn === person)
+                    <h4 id=time> #{x.date}
+                    <div id=emptyline> <div>
+                    h4 #{x.personLoggedIn} :
+                    ul #{x.personPost}
+                    form(method='POST' action='/posts/writeComment/' + x.postId + '/' + page)
+                      div.form-group
+                        input#content.form-control(type='text', placeholder='Post your comment' name='commentContent')
+                      button.btn.btn-primary(type='submit') Publish comment
+                    ul
+                    p Comments:
+                        each y in comment_list
+                          - if (x.postId === y.commentedPost)
+                            <p id=comment> #{y.date}.......#{y.commentor} : #{y.commentsForPost} </p>
+                        else
+                          p no comments yet
+                        <div id=line> <div>
+                    ul
+  <div id=line> <div>    
+  <div>

@@ -1,0 +1,102 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='start/style.css')
+    style
+      include ../start/style_post.css
+ 
+    h1= "Naamakirja"
+    
+    <div class=container>
+      <h2 id=title1> Welcome to Naamakirja
+      <h2>
+      <h2 id= title2> #{title}
+      <h2>
+      <h5 id= leftTitle> Show my feed
+          form(method='GET' action='/posts/')
+            button.btn.btn-primary(type='submit') Go!
+      <h5>
+
+      <h5 id= leftTitle> Log out
+          form(method='POST' action='/posts/logout')
+            button.btn.btn-primary(type='submit') Go!
+      <h5>
+      <div>
+      <div class= container3>
+      <h5 id= centerTitle> Add new friends
+          form(method='POST' action='/posts/addFriend')
+                    div.form-group
+                      input#content.form-control(type='name', placeholder='Search new friends...' name='content')
+       
+                    button.btn.btn-primary(type='submits') Send request
+      <h5 id=msg_f_y> #{message_f} 
+        <h5>
+      <h5 id= friendTitle> New friend requests <h5>
+      - var counter = 0
+      for user in user_list
+        - if (user.target === title) 
+          - counter++
+          <h4 id= newFriend> #{user.asker}
+          form(method='POST' action='/posts/acceptRequest/' + user.requestId + "/" + user.asker)
+              div.form-group
+                button.btn.btn-primary(type='submits') Accept
+          </h4>
+        
+      - if (counter === 0)
+        <h4 id= newFriend> No new friend requests </h4>
+      <h5 id= friendTitle> Your Friends <h5>
+      each friend in friend_list  
+        - if (title === friend.name)
+          <h4 id= newFriend> #{friend.friendWith} 
+          form(method='POST' action='/posts/deleteFriend/' + friend.name + "/" + friend.friendWith)
+              div.form-group
+                button.btn.btn-primary(type='submitf') Remove from friends
+          </h4>
+    <div>
+    <div>
+  - var page = 'mypage';
+  <div class = container2> 
+    h6 Submit New Post  -  (max. 1000 characters)
+      form(method='POST' action='/posts/create/' + page)
+                div.form-group
+                  input#content.form-control(type='text', placeholder='Post text' name='content')
+                button.btn.btn-primary(type='submit') Submit new post
+      <h5 id=msg> #{tooBigOrNot}
+      <h5 id=msg> #{message} 
+        <h5>
+    h4 Your posts:
+    <div id=line> <div>
+
+    
+    - var counter = 0
+    each x in post_list.reverse()
+      - if (x.personLoggedIn == title)
+        - counter++
+        <h4 id=time> #{x.date}
+        <div id=emptyline> <div>
+        h4 #{x.personLoggedIn} :
+        ul #{x.personPost} 
+        form(method='POST' action='/posts/writeComment/' + x.postId + '/' + page)
+          div.form-group
+            input#content.form-control(type='text', placeholder='Post your comment' name='commentContent')
+          button.btn.btn-primary(type='submit') Publish comment
+        
+        <p id=comments> Comments: <p>
+        each y in comment_list
+          - if (x.postId === y.commentedPost)
+            <p id=comment> #{y.date}.......#{y.commentor} : #{y.commentsForPost} </p>
+
+        else
+          p no comments yet
+  
+        form(method='POST' action='/posts/delete/' + x.postId)
+                div.form-group
+                button.btn.btn-primary(type='submit') Delete post
+            
+        <div id=line> <div>
+        
+
+    - if (counter === 0) 
+        ul You don't have any own posts yet
+  <div>

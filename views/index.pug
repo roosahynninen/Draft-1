@@ -1,0 +1,40 @@
+doctype html
+html
+  head
+    title= title
+    <meta charset="UTF-8" />
+    link(rel='stylesheet', href='start/style.css')
+ 
+    style
+      include ../start/style_index.css
+
+  h1= title
+<div id="grad1"></div>
+
+  <div class=container>
+      h4= message
+      h5= message2
+
+        h2 Log In
+      form(method='POST' action='/posts/login')
+        div.form-group
+            label(for='name') Name:
+            input#name.form-control(type='text', placeholder='Your name' name='user')
+        div.form-group
+            label(for='password') Password:
+            input#password.form-control(type='password', placeholder='Your password' name='userpassword')
+        button.btn.btn-primary(type='submit') Log in
+
+        h3 Sign Up
+      form(method='POST' action='/posts/signup')
+        div.form-group
+            label(for='name') Name:
+            input#name.form-control(type='text', placeholder='Your name' name='user2')
+        div.form-group
+            label(for='password') Password:
+            input#password.form-control(type='text', placeholder='Your password' name='userpassword2')
+        div.form-group
+            label(for='password') Repeat password:
+            input#password.form-control(type='text', placeholder='Your password' name='userpassword3')
+        button.btn.btn-primary(type='submit') Log in
+  <div>

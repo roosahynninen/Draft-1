@@ -1,0 +1,64 @@
+doctype html
+html
+  head
+    title= 'Welcome to Naamakirja' + title
+    link(rel='stylesheet', href='start/style.css')
+    style
+      include ../start/style_post.css
+      
+    h1= "Naamakirja"
+    
+    <div class=container>
+          <h2 id=title1> Welcome to Naamakirja
+          <h2>
+          <h2 id= title2> #{title}
+          <h2>
+          <h5 id= leftTitle> Show my page 
+              form(method='GET' action='/posts/mypage')
+                button.btn.btn-primary(type='submit') Go!
+          <h5>
+
+          <h5 id= leftTitle> Log out
+              form(method='POST' action='/posts/logout')
+                button.btn.btn-primary(type='submit') Log Out
+          <h5>
+          <div>
+    <div>
+  - var page = 'feed';
+  <div class=container2>
+        h6 Filter posts by person
+          form(method='POST' action='/posts/filter/' + page)
+                    div.form-group
+                      input#content.form-control(type='text', placeholder='Name' name='personName')
+                    button.btn.btn-primary(type='submit') Search
+          <h5 id=msg> #{message} 
+            <h5>
+        h4 Your friends posts:
+        <div id=line> <div>
+        - var counter = 0
+        each x in post_list.reverse()
+          each friend in friend_list
+            - if (title === friend.name && x.personLoggedIn === friend.friendWith)
+              - if (x.personLoggedIn != title)
+                - counter++
+                <h4 id=time> #{x.date}
+                <div id=emptyline> <div>
+                h4 #{x.personLoggedIn}:
+                ul #{x.personPost}
+                form(method='POST' action='/posts/writeComment/' + x.postId + '/' + page)
+                    div.form-group
+                      input#content.form-control(type='text', placeholder='Post your comment' name='commentContent')
+                    button.btn.btn-primary(type='submit') Publish comment
+                
+                <p id=comments> Comments: <p>
+                each y in comment_list
+                  - if (x.postId === y.commentedPost)
+                      //- <h4 id=ctime> #{y.date} </h4>
+                      <p id=comment> #{y.date}.......#{y.commentor} : #{y.commentsForPost} </p>
+                else
+                  p no comments yet
+                  
+                <div id=line> <div>
+        - if (counter === 0)
+          ul There are no posts yet.
+  <div>
