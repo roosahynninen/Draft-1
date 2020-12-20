@@ -48,22 +48,6 @@ mongoose.connection
 
 ///////////////////////////////////////////////////////////
 
-// // connecting to database with mongoose
-mongoose
-  .connect(url, { useNewUrlParser: true })
-  .then(() => console.log("Connection Successful"))
-  .catch((err) => console.log(err));
-
-mongoose.connection
-  .once("open", function () {
-    console.log("Connection made!");
-  })
-  .on("error", function (error) {
-    console.log("Not good :(", error);
-  });
-
-///////////////////////////////////////////////////////////
-
 // creating all used schemas for MongoDB
 var postSchema = new mongoose.Schema({
   postId: String,
