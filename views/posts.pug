@@ -1,19 +1,19 @@
 doctype html
 html
   head
-    title= 'Welcome to Naamakirja' + title
+    title= 'Oh What A day!' + title
     link(rel='stylesheet', href='start/style.css')
     style
       include ../start/style_post.css
       
-    h1= "Naamakirja"
+    h1= "What A Day!"
     
     <div class=container>
-          <h2 id=title1> Welcome to Naamakirja
+          <h2 id=title1> Oh What A Day!
           <h2>
           <h2 id= title2> #{title}
           <h2>
-          <h5 id= leftTitle> Show my page 
+          <h5 id= leftTitle> My page 
               form(method='GET' action='/posts/mypage')
                 button.btn.btn-primary(type='submit') Go!
           <h5>
@@ -26,7 +26,7 @@ html
     <div>
   - var page = 'feed';
   <div class=container2>
-        h6 Filter posts by person
+        h6 Search posts by user
           form(method='POST' action='/posts/filter/' + page)
                     div.form-group
                       input#content.form-control(type='text', placeholder='Name' name='personName')
@@ -56,9 +56,12 @@ html
                       //- <h4 id=ctime> #{y.date} </h4>
                       <p id=comment> #{y.date}.......#{y.commentor} : #{y.commentsForPost} </p>
                 else
-                  p no comments yet
+                  p No comments yet
                   
                 <div id=line> <div>
         - if (counter === 0)
           ul There are no posts yet.
   <div>
+
+  br
+  p © Roosa Hynninen 2020

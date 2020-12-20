@@ -6,10 +6,10 @@ html
     style
       include ../start/style_post.css
  
-    h1= "Naamakirja"
+    h1= "What A day!"
     
     <div class=container>
-      <h2 id=title1> Welcome to Naamakirja
+      <h2 id=title1> Oh What A Day!
       <h2>
       <h2 id= title2> #{title}
       <h2>
@@ -57,7 +57,7 @@ html
     <div>
   - var page = 'mypage';
   <div class = container2> 
-    h6 Submit New Post  -  (max. 1000 characters)
+    h6 Submit New Post  -  (max. 400 characters)
       form(method='POST' action='/posts/create/' + page)
                 div.form-group
                   input#content.form-control(type='text', placeholder='Post text' name='content')
@@ -100,3 +100,6 @@ html
     - if (counter === 0) 
         ul You don't have any own posts yet
   <div>
+
+  br
+  p © Roosa Hynninen 2020

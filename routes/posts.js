@@ -590,7 +590,7 @@ router.post(
 // method for logout
 // renders just index.pug 'starting' view
 router.post("/logout", function (req, res, next) {
-  res.render("index", { title: "Naamakirja" });
+  res.render("index", { title: "What A Day!" });
 });
 
 /////////////////////////////////////////////////////////////
@@ -795,17 +795,17 @@ router.post("/signup", sanitizeBody("*").trim().escape(), function (
       password: local_password
     }).save(function (err) {
       if (err) throw err;
-      console.log("user added");
+      console.log("User added");
     });
-    console.log("Voit nyt kirjautua");
+    console.log("You may now log in");
     res.render("index", {
-      title: "Naamakirja",
+      title: "What A Day!",
       message2: "You may now log in"
     });
   } else {
     console.log("wrong password");
     res.render("index", {
-      title: "Naamakirja",
+      title: "What A Day!",
       message: "Please make sure to type password correctly twice"
     });
   }
